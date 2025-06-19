@@ -1,4 +1,4 @@
-# main.py - 健壮化版本
+# main.py - 修复语法错误版本
 
 import os
 import sys
@@ -29,8 +29,10 @@ from cosimulation.scenarios import ScenarioManager
 from cosimulation.results_analyzer import ResultsAnalyzer
 from visualizations.plot_results import Visualizer
 
-# 尝试导入增强功能
+# 全局变量声明
 ENHANCED_FEATURES_AVAILABLE = False
+
+# 尝试导入增强功能
 try:
     from visualizations.enhanced_visualizations import EnhancedVisualizer
     from validation.model_validator import ModelValidator
@@ -99,8 +101,9 @@ class BDWPTSimulationPlatform:
                     logger.info("Enhanced features initialized successfully")
                 except Exception as e:
                     logger.warning(f"Failed to initialize enhanced features: {e}")
-                    global ENHANCED_FEATURES_AVAILABLE
-                    ENHANCED_FEATURES_AVAILABLE = False
+                    # 注意：这里不再修改全局变量，而是设置实例变量
+                    self.enhanced_visualizer = None
+                    self.model_validator = None
             
             logger.info("Initialization complete!")
             
